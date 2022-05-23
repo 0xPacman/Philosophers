@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_behaviours.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 13:29:34 by ahjadani          #+#    #+#             */
+/*   Updated: 2022/05/23 17:50:30 by ahjadani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../philo_bonus.h"
+
+void	ft_print(t_data *data, int pid, char *str, int isdead)
+{
+	sem_wait(data->print);
+	printf("%lld %d %s\n", ft_get_time() - data->time_var, pid, str);
+	if (!isdead)
+		sem_post(data->print);
+	else
+		exit(1);
+}
+
+void	philo_thinking(t_philo *ph)
+{
+	ft_print(ph->data, ph->id, "is thinking", 0);
+}
+
+void	philo_eating(t_philo *ph)
+{
+	sem_wait(ph->data->forks);
+	ft_print(ph->data, ph->id, "has taken a fork", 0);
+	sem_wait(ph->data->forks);
+	ft_print(ph->data, ph->id, "has taken a fork", 0);
+	sem_wait(ph->eating);
+	ft_print(ph->data, ph->id, "is eating", 0);
+	ph->last_meal = ft_get_time();
+	ph->data->eat_time++;
+	usleep(ph->data->t_eat * 1000);
+	while (ft_get_time() - ph->last_meal < ph->data->t_eat)
+		continue ;
+	sem_post(ph->eating);
+	sem_post(ph->data->forks);
+	sem_post(ph->data->forks);
+	usleep(100);
+}
+
+void	philo_sleeping(t_philo *ph)
+{
+	ph->last_sleep = ft_get_time();
+	ft_print(ph->data, ph->id, "is sleeping", 0);
+	usleep(ph->data->t_sleep * 1000);
+	while (ft_get_time() - ph->last_sleep < ph->data->t_sleep)
+		continue ;
+	usleep(100);
+}

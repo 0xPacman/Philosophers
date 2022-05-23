@@ -1,0 +1,55 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_behaviours.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/23 13:29:34 by ahjadani          #+#    #+#             */
+/*   Updated: 2022/05/23 17:39:48 by ahjadani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../philo.h"
+
+void	ft_print(t_data *data, int pid, char *str, int isdead)
+{
+	pthread_mutex_lock(&data->print);
+	printf("%lld %d %s\n", ft_get_time() - data->time_var, pid, str);
+	if (!isdead)
+		pthread_mutex_unlock(&data->print);
+}
+
+void	philo_thinking(t_philo *ph)
+{
+	ft_print(ph->data, ph->id, "is thinking", 0);
+}
+
+void	philo_eating(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->data->forks[ph->fork]);
+	ft_print(ph->data, ph->id, "has taken a fork", 0);
+	pthread_mutex_lock(&ph->data->forks[ph->next_fork]);
+	ft_print(ph->data, ph->id, "has taken a fork", 0);
+	pthread_mutex_lock(&ph->eating);
+	ft_print(ph->data, ph->id, "is eating", 0);
+	ph->data->eat_time++;
+	ph->eating_state = 1;
+	ph->last_meal = ft_get_time();
+	if (ph->data->t_eat > 0)
+		usleep(ph->data->t_eat * 1000);
+	ph->eating_state = 0;
+	pthread_mutex_unlock(&ph->eating);
+	pthread_mutex_unlock(&ph->data->forks[ph->fork]);
+	pthread_mutex_unlock(&ph->data->forks[ph->next_fork]);
+}
+
+void	philo_sleeping(t_philo *ph)
+{
+	ph->last_sleep = ft_get_time();
+	ft_print(ph->data, ph->id, "is sleeping", 0);
+	if (ph->data->t_sleep > 0)
+		usleep(ph->data->t_sleep * 1000);
+	while (ph->last_sleep + ph->data->t_sleep > ft_get_time())
+		continue ;
+}
