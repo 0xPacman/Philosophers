@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 13:37:15 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/05/23 17:51:37 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 20:56:15 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,9 @@ void	*monitor(void *data)
 		sem_wait(ph->eating);
 		if ((int)ph->data->eat_time >= ph->data->nb_me + 1
 			&& ph->data->nb_me != -42)
-		{
-			ft_print(ph->data, ph->id, "died", 1);
-		}
+			ft_print(ph->data, ph->id, "\033[0;31mdied\033[0m", 1);
 		if (ft_get_time() - ph->last_meal >= ph->data->t_die)
-			ft_print(ph->data, ph->id, "died", 1);
+			ft_print(ph->data, ph->id, "\033[0;31mdied\033[0m", 1);
 		sem_post(ph->eating);
 		usleep(100);
 	}

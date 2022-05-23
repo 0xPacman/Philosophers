@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:13:55 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/05/23 17:45:21 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:56:53 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ int	main(int argc, char *argv[])
 	memset(data, 0, sizeof(t_data));
 	ft_set_data(argc, argv, data);
 	free_philo(data);
+	//system("leaks philo");
 	return (0);
 }

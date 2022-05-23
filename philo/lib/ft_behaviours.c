@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 13:29:34 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/05/23 17:39:48 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 20:18:49 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 void	ft_print(t_data *data, int pid, char *str, int isdead)
 {
+	isdead = 0;
 	pthread_mutex_lock(&data->print);
-	printf("%lld %d %s\n", ft_get_time() - data->time_var, pid, str);
+	if (!data->end)
+		printf("%lld %d %s\n", ft_get_time() - data->time_var, pid, str);
 	if (!isdead)
 		pthread_mutex_unlock(&data->print);
+	pthread_mutex_unlock(&data->print);
+
 }
 
 void	philo_thinking(t_philo *ph)

@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/19 19:13:18 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/05/23 17:49:45 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:56:14 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_data
 	unsigned int	eat_time;
 	int				nb_me;
 	long long		time_var;
+	int  			end;
 }	t_data;
 
 typedef struct s_philo

@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 13:37:15 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/05/23 17:41:00 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 20:55:26 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,23 @@ void	*monitor(void *data)
 		if (ph->data->nb == 1)
 		{
 			usleep(ph->data->t_die * 1000);
-			ft_print(ph->data, ph->id, "died", 1);
+			ft_print(ph->data, ph->id, "\033[0;31mdied\033[0m", 1);
 			ph->data->not_dead = 0;
+			ph->data->end = 1;
 			return (NULL);
 		}
 		if (ft_get_time() - ph->last_meal > ph->data->t_die)
 		{
-			ft_print(ph->data, ph->id, "died", 1);
+			ft_print(ph->data, ph->id, "\033[0;31mdied\033[0m", 1);
 			ph->data->not_dead = 0;
+			ph->data->end = 1;
+			return (NULL);
 		}
 		if (ph->data->eat_time == (ph->data->nb_me * ph->data->nb))
 		{
-			ft_print(ph->data, ph->id, "died", 1);
 			ph->data->not_dead = 0;
+			ph->data->end = 1;
+			return (NULL);
 		}
 		usleep(190);
 	}

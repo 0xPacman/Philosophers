@@ -6,7 +6,7 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 13:29:34 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/05/23 17:50:30 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 21:09:54 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	philo_eating(t_philo *ph)
 	while (ft_get_time() - ph->last_meal < ph->data->t_eat)
 		continue ;
 	sem_post(ph->eating);
-	sem_post(ph->data->forks);
 	sem_post(ph->data->forks);
 	usleep(100);
 }
