@@ -6,23 +6,25 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:35 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/02/20 19:17:19 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 18:13:21 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void ft_is_valid(char *str)
+void	ft_is_valid(char *str)
 {
-    int i;
-    i = 0;
-    while (str[i])
-    {
-        if (!ft_isdigit(str[i]))
-            ft_error_handler();
-        i++;
-    }
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			ft_error_handler();
+		i++;
+	}
 }
+
 int	ft_atoi(const char *str)
 {
 	long		sum;
@@ -32,7 +34,7 @@ int	ft_atoi(const char *str)
 	sum = 0;
 	sign = 1;
 	i = 0;
-    ft_is_valid((char *)str);
+	ft_is_valid((char *)str);
 	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '+' || str[i] == '-')

@@ -6,29 +6,23 @@
 /*   By: ahjadani <ahjadani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 18:31:35 by ahjadani          #+#    #+#             */
-/*   Updated: 2022/05/23 11:46:26 by ahjadani         ###   ########.fr       */
+/*   Updated: 2022/05/23 18:14:05 by ahjadani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo_bonus.h"
 
-void ft_is_valid(char *str)
+void	ft_is_valid(char *str)
 {
-    int i;
-    i = 0;
-    while (str[i])
-    {
-        if (!ft_isdigit(str[i]))
-            ft_error_handler();
-        i++;
-    }
-}
+	int	i;
 
-int ft_num_check(long nb)
-{
-	if (nb < 1 || nb > 2147483647)
-		return (0);
-	return (1);
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			ft_error_handler();
+		i++;
+	}
 }
 
 int	ft_atoi(const char *str)
@@ -40,7 +34,7 @@ int	ft_atoi(const char *str)
 	sum = 0;
 	sign = 1;
 	i = 0;
-    ft_is_valid((char *)str);
+	ft_is_valid((char *)str);
 	while (ft_isspace(str[i]))
 		i++;
 	if (str[i] == '+' || str[i] == '-')
@@ -54,7 +48,7 @@ int	ft_atoi(const char *str)
 		sum = sum * 10 + str[i] - 48;
 		i++;
 	}
-	if (ft_num_check(sum * sign) == 0)
+	if ((sum * sign) > 2147483647 || ((sum * sign) < -2147483648))
 		ft_error_handler();
 	return (sum * sign);
 }
