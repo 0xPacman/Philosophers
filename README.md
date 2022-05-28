@@ -7,4 +7,5 @@ insures that none starves as long as each philosopher eventually stops eating, a
 
 ### usage: 
 `./philo [Number of philos/forks] [Time to die] [Time to eat] [Time to sleep] [Must eat(optional)]` 
+
 `./philo_bonus [Number of philos/forks] [Time to die] [Time to eat] [Time to sleep] [Must eat(optional)]`
